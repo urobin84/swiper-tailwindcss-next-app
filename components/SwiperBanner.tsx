@@ -102,6 +102,7 @@ function SwiperBanner() {
                         effect={randomData.effect}
                         modules={[randomData.EffectCards, Pagination, Navigation, Autoplay]}
                         spaceBetween={0}
+                        grabCursor={true}
                         slidesPerView={1}
                         loop={true}
                         autoplay={{
@@ -123,7 +124,7 @@ function SwiperBanner() {
                         effect={randomData.effect}
                         modules={[randomData.EffectCoverflow, Pagination, Navigation, Autoplay]}
                         spaceBetween={0}
-                        slidesPerView={1}
+                        slidesPerView={"auto"}
                         loop={true}
                         autoplay={{
                             delay: randomDelay,
@@ -133,6 +134,15 @@ function SwiperBanner() {
                             clickable: true
                         }}
                         navigation={true}
+                        grabCursor={true}
+                        centeredSlides={true}
+                        coverflowEffect={{
+                            rotate: 50,
+                            stretch: 0,
+                            depth: 100,
+                            modifier: 1,
+                            slideShadows: true,
+                        }}
                         className="w-full"
                     >
                         {child}
@@ -146,6 +156,16 @@ function SwiperBanner() {
                         spaceBetween={0}
                         slidesPerView={1}
                         loop={true}
+                        grabCursor={true}
+                        creativeEffect={{
+                            prev: {
+                                shadow: true,
+                                translate: [0, 0, -400],
+                            },
+                            next: {
+                                translate: ["100%", 0, 0],
+                            },
+                        }}
                         autoplay={{
                             delay: randomDelay,
                             disableOnInteraction: false
@@ -210,8 +230,7 @@ function SwiperBanner() {
         }
     }
 
-    console.log(randomData)
-    console.log(randomDelay)
+    const slide = [1, 2, 3];
 
     return (
         <>
@@ -219,37 +238,21 @@ function SwiperBanner() {
             {
                 renderSwiper(randomDelay, (
                     <>
-                        <SwiperSlide>
-                            <div className="swiper-slide">
-                                <Image
-                                    src="/images/banner1.jpg"
-                                    alt="Picture of the author"
+                        {/* Swiper Slide */}
+                        {slide.map((item, index) => (
+                            <SwiperSlide key={item}>
+                                <div className="w-full">
+                                    <Image
+                                    src={`/images/${item}.png`}
+                                    alt={`banner${item}`}
                                     width={500}
                                     height={500}
                                     className="w-full object-cover object-center"
-                                />
-                            </div>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Image
-                                src="/images/banner2.jpeg"
-                                alt="Picture of the author"
-                                width={500}
-                                height={500}
-                                className="w-full object-cover object-center"
-                            />
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <div className="swiper-slide flex items-center">
-                                <Image
-                                    src="/images/banner3.jpeg"
-                                    alt="Picture of the author"
-                                    width={500}
-                                    height={500}
-                                    className="w-full object-cover object-center"
-                                />
-                            </div>
-                        </SwiperSlide>
+                                    />
+                                </div>
+                            </SwiperSlide>
+                        ))
+                        }
                     </>
                 )
             )}
